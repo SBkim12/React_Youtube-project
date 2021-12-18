@@ -1,0 +1,8 @@
+.detail {
+  padding: 0.2em;
+}
+
+/* pre의 글자가 길어서 화면이 길어지는것을 방지 */
+.description {
+  white-space: pre-wrap;
+}

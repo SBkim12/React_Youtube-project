@@ -1,3 +1,29 @@
-.app{
+.app {
   max-width: 80rem;
+}
+
+.content {
+  display: flex;
+}
+
+.detail {
+  flex: 1 1 70%;
+}
+
+.list {
+  flex: 1 1 30%;
+}
+
+@media only screen and (max-width: 900px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .detail {
+    width: 100%;
+  }
+
+  .list {
+    width: 100%;
+  }
 }
