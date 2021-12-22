@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./app.module.css";
 import VideoList from "./components/video_list/video_list";
 import SearchHeader from "./components/search_header/search_header";
@@ -12,20 +12,28 @@ function App({ youtube }) {
     setSelectedVideo(video);
   };
 
-  const search = (query) => {
+  //useCallback은 한 번 만들면 메모리상에서 계속 보관하기 때문에 메모리에 영향이 감
+  const search = useCallback((query) => {
     setSelectedVideo(null);
-    youtube
+    if(query===""){
+      youtube
+    .mostPopular() //
+    .then((videos) => setVideos(videos));
+    }else{
+      youtube
       .search(query) //
       .then((videos) => {
         setVideos(videos);
       });
-  };
+    }
+  }, [youtube] );
 
   useEffect(() => {
     youtube
-      .mostPopular() //
-      .then((videos) => setVideos(videos));
-  }, []);
+    .mostPopular() //
+    .then((videos) => setVideos(videos));
+  }, [youtube]);
+
   return (
     <div className={styles.app}>
       <SearchHeader onSearch={search} />
